@@ -1,7 +1,7 @@
 # EXPERIMENT-NO--05-Distance measurement using Ultrasonic sensor
 
 ## AIM: 
-To interface an FSR(force sensitive resistor) and scale the output voltage obtained to pressure applied 
+To interface an Ultrasonic sensor to measure the distance of the obstacles
  
 ### COMPONENTS REQUIRED:
 1.	ultrasonic sensor module HC-SR04
@@ -34,12 +34,6 @@ The time between the transmission and reception of the signal allows us to calcu
 distance to an object = ((speed of sound in the air)*time)/2
 speed of sound in the air at 20ºC (68ºF) = 343m/s
 
-### FIGURE 01 CIRCUIT OF INTERFACING ULTRASONIC SENSOR 
-
-
-![image](https://user-images.githubusercontent.com/36288975/166430594-5adb4ca9-5a42-4781-a7e6-7236b3766a85.png)
-
-
 
 ### PROCEDURE:
 1.	Connect the circuit as per the circuit diagram 
@@ -56,17 +50,30 @@ speed of sound in the air at 20ºC (68ºF) = 343m/s
 
 ### PROGRAM 
 
-### Distance vs measurement table 
+#define echoPin 9
+#define trigPin 10
 
+long duration;
+int distance;
 
-
-
-
-
-
+void setup(){
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+void loop(){
+  digitalWrite(trigPin,LOW);
+  delayMicroseconds(10);
+  digitalWrite(trigPin,LOW);
+  duration = pulseIn(echoPin,HIGH);
+  distance = duration * 0.032 / 2;
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+} 
+# output 
+![output](.//a1.png)
+![output](.//A2.png)
 
 ### RESULTS
-
-
-
- 
+THUS THE DISTANCE VALUE IS MEASURED IN "CM" USING ULRASONIC SENSOR BY ARDIUNO
